@@ -11,9 +11,12 @@ package com.snaptopixels.TheWind
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.textures.Texture;
+	import starling.textures.TextureSmoothing;
 	import starling.utils.AssetManager;
 
 	import com.greensock.TweenMax;
+	import com.greensock.easing.Quad;
+	import com.snaptopixels.utils.InvisibleButton;
 	import com.snaptopixels.utils.ProgressBar;
 	
 	public class StartUp extends Sprite
@@ -23,7 +26,13 @@ package com.snaptopixels.TheWind
 		private var mLoadingProgress : ProgressBar;
 		private var loaderContainer : Sprite = new Sprite();
 		private var pagesContainer : Sprite = new Sprite();
-		private var list : List;
+		private var navbarContainer : Sprite = new Sprite();
+		private var pagesList : List;
+		
+		private static var navBarYposOpen : Number = 0;
+		private static var navBarYposClosed : Number;
+		private static var navBarWidth : Number;
+		private static var navBarHeight : Number;
 
 		public function StartUp()
 		{
@@ -34,15 +43,16 @@ package com.snaptopixels.TheWind
 		{
 			sAssets = assets;
 
-			this.addChild( pagesContainer );
-			this.addChild( loaderContainer );
+			addChild( pagesContainer );
+			addChild( loaderContainer );
+			addChild( navbarContainer );
 
-			this.loaderContainer.addChild( new Image( background ) );
+			loaderContainer.addChild( new Image( background ) );
 
 			mLoadingProgress = new ProgressBar( 175, 20 );
 			mLoadingProgress.x = (background.width - mLoadingProgress.width) / 2;
 			mLoadingProgress.y = background.height * 0.7;
-			this.loaderContainer.addChild( mLoadingProgress );
+			loaderContainer.addChild( mLoadingProgress );
 
 			assets.loadQueue( function( ratio : Number ) : void
 			{
@@ -56,9 +66,60 @@ package com.snaptopixels.TheWind
 					}, 0.15 );
 			} );
 		}
+
+		private function createNavigation() : void
+		{
+			var image : Image = new Image( sAssets.getTexture( "NavBar" ) );
+			image.smoothing = TextureSmoothing.TRILINEAR;
+			navbarContainer.addChild( image );
+			navBarWidth = navbarContainer.width;
+			navBarHeight = navbarContainer.height;
+			navBarYposClosed = navbarContainer.y = -(navBarHeight - 55);
+			navbarContainer.y = -navBarHeight;
+			
+			var navbarButton : InvisibleButton = new InvisibleButton( navBarWidth, navBarHeight, false );
+			navbarButton.name = "navbar_button";
+			navbarContainer.addChild( navbarButton );
+			navbarButton.addEventListener( Event.TRIGGERED, openCloseNavBarContainer );
+			
+			TweenMax.to( navbarContainer, .5, { y:navBarYposOpen, ease:Quad.easeInOut, onComplete:closeNavBarContainer, onCompleteParams:[true] } );
+		}
+		
+		private function closeNavBarContainer(firstTime:Boolean):void
+		{
+			TweenMax.killTweensOf( navbarContainer );
+			if(firstTime)
+			{
+				firstTime = false;
+				TweenMax.to( navbarContainer, .3, { y:navBarYposClosed, ease:Quad.easeInOut, delay: .7} );
+			}
+			else
+			{
+				TweenMax.to( navbarContainer, .3, { y:navBarYposClosed, ease:Quad.easeInOut} );
+			}
+		}
+		
+		private function openNavBarContainer():void
+		{
+			TweenMax.killTweensOf( navbarContainer );
+			TweenMax.to( navbarContainer, .3, { y:navBarYposOpen, ease:Quad.easeInOut } );
+		}
+		
+		private function openCloseNavBarContainer(event:Event):void
+		{
+			if(navbarContainer.y > navBarYposClosed )
+			{
+				closeNavBarContainer(false);
+			}
+			else
+			{
+				openNavBarContainer();
+			}
+		}
 		
 		private function removeLoaderContainer() : void
 		{
+			createNavigation();
 			mLoadingProgress.removeFromParent( true );
 			loaderContainer.removeFromParent( true );
 			loaderContainer = mLoadingProgress = null;
@@ -66,7 +127,6 @@ package com.snaptopixels.TheWind
 		
 		private function createPages() : void
 		{
-			trace("createPages");
 			const collection:ListCollection = new ListCollection(
 			[
 				{ label: "cover", texture: sAssets.getTexture( "cover" ) },
@@ -87,35 +147,41 @@ package com.snaptopixels.TheWind
 			
 			const listLayout:HorizontalLayout = new HorizontalLayout();
 			listLayout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_LEFT;
-			listLayout.manageVisibility = true;
+			listLayout.useVirtualLayout = true;
+//			listLayout.manageVisibility = true;
 			
-			this.list = new List();
-			this.list.dataProvider = collection;
-			this.list.layout = listLayout;
-			this.list.snapToPages = true;
-			this.list.horizontalScrollPolicy = List.SCROLL_POLICY_ON;
-			this.list.verticalScrollPolicy = List.SCROLL_POLICY_OFF;
-			this.list.itemRendererFactory = itemRendererFactory;
-			this.list.addEventListener("scrollStart", list_scrollStartHandler);
-			this.list.addEventListener("scrollComplete", list_scrollCompleteHandler);
-			this.pagesContainer.addChild(this.list);
+			pagesList = new List();
+			pagesList.dataProvider = collection;
+			pagesList.layout = listLayout;
+			pagesList.snapToPages = true;
+			pagesList.horizontalScrollPolicy = List.SCROLL_POLICY_ON;
+			pagesList.verticalScrollPolicy = List.SCROLL_POLICY_OFF;
+			pagesList.itemRendererFactory = itemRendererFactory;
+			pagesList.addEventListener("scrollStart", list_scrollStartHandler);
+			pagesList.addEventListener("scrollComplete", list_scrollCompleteHandler);
+			pagesContainer.addChild(pagesList);
 			
-			this.layout();
+			layout();
 		}
 		
 		private function layout():void
 		{
-			this.list.width = 2048;
-			this.list.height = 1536;
-			this.list.validate();
+			pagesList.width = 2048;
+			pagesList.height = 1536;
+			pagesList.validate();
 
 			checkCurrentPageIndex();
 		}
 
+		private function skipToChapterIndex(_num: int) : void
+		{
+			pagesList.scrollToDisplayIndex( _num, .4 );
+		}
+
 		private function checkCurrentPageIndex() : void
 		{
-			trace( "horizontalPageIndex :: " + this.list.horizontalPageIndex );
-			trace( "horizontalPageCount :: " + this.list.horizontalPageCount );
+			trace( "horizontalPageIndex :: " + pagesList.horizontalPageIndex );
+			trace( "horizontalPageCount :: " + pagesList.horizontalPageCount );
 		}
 
 		private function list_scrollStartHandler( event : String ) : void

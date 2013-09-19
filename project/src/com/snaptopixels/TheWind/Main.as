@@ -41,7 +41,7 @@ package com.snaptopixels.TheWind
 			var assets : AssetManager = new AssetManager( scaleFactor );
 
 			assets.verbose = Capabilities.isDebugger;
-			assets.enqueue( appDir.resolvePath( "pages" ) );
+			assets.enqueue( appDir.resolvePath( "assets" ) );
 
 			var backgroundClass : Class = BackgroundHD;
 			var background : Bitmap = new backgroundClass();
