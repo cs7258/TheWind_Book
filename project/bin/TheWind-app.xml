@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://ns.adobe.com/air/application/3.8">
+  
+  <id>com.snaptopixels.TheWind</id>
+  <filename>TheWind</filename>
+  <name>TheWind</name>
+  <versionNumber>1.5</versionNumber>
+  
+  <initialWindow>
+    <content>TheWind.swf</content>
+    <aspectRatio>landscape</aspectRatio>
+    <fullScreen>true</fullScreen>
+    <autoOrients>true</autoOrients>
+    <renderMode>direct</renderMode>
+    <visible>true</visible>
+  </initialWindow>
+  
+  <android>
+		<colorDepth>16bit</colorDepth>
+		<manifestAdditions><![CDATA[
+			<manifest android:installLocation="auto">
+			    <uses-permission android:name="android.permission.INTERNET"/>
+			</manifest>
+		]]></manifestAdditions>
+	</android>
+  
+  <iPhone>
+    <InfoAdditions><![CDATA[<key>UIDeviceFamily</key>
+  <array>
+    <string>2</string>
+  </array>
+  <key>UIStatusBarStyle</key>
+  <string>UIStatusBarStyleBlackOpaque</string>
+  <key>UIRequiresPersistentWiFi</key>
+  <string>YES</string>]]></InfoAdditions>
+    <requestedDisplayResolution>high</requestedDisplayResolution>
+  </iPhone>
+</application>
+

@@ -18,9 +18,9 @@ package com.snaptopixels.TheWind
 	[SWF(width="2048", height="1536", frameRate="60", backgroundColor="#000000")]
 	public class Main extends Sprite
 	{
-		[Embed(source="/../assets/Default-Landscape.png")]
+		[Embed(source="/../bin/Default-Landscape.png")]
 		private static var Background : Class;
-		[Embed(source="/../assets/Default-Landscape@2x.png")]
+		[Embed(source="/../bin/Default-Landscape@2x.png")]
 		private static var BackgroundHD : Class;
 		
 		private var mStarling : Starling;
