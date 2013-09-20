@@ -1,4 +1,4 @@
-#Thu Sep 19 17:47:31 EDT 2013
+#Thu Sep 19 20:45:32 EDT 2013
 com.powerflasher.fdt.core.CompatiblePlayers=AIR_Debug_Launcher
 com.powerflasher.fdt.core.CompilerArguments=-static-link-runtime-shared-libraries\=true\n-target-player\={playerVersion}\n-library-path+\="{flexSDK}/frameworks/locale/en_US"\n-default-size\=550,400\n-swf-version\=21
 com.powerflasher.fdt.core.DefaultOutputFolder=bin
@@ -37,7 +37,7 @@ com.powerflasher.fdt.core.mobile.iOS.CUSTOM.ADT.CMD.LINE=${package} ${target} ${
 com.powerflasher.fdt.core.mobile.iOS.CUSTOMIZE.ADT.ARGS=false
 com.powerflasher.fdt.core.mobile.iOS.DEPLOY.LOCATION=../../../../Desktop/TheWind.ipa
 com.powerflasher.fdt.core.mobile.iOS.DEPLOY.PACKAGE.TYPE=1
-com.powerflasher.fdt.core.mobile.iOS.DEPLOY.PRE.PACKAGE.LAUNCHER=TheWind DesktopTest
+com.powerflasher.fdt.core.mobile.iOS.DEPLOY.PRE.PACKAGE.LAUNCHER=TheWind Desktop
 com.powerflasher.fdt.core.mobile.iOS.DEPLOY.SDK.LOCATION=
 com.powerflasher.fdt.core.mobile.iOS.ICON.PATH.114x114=
 com.powerflasher.fdt.core.mobile.iOS.ICON.PATH.29x29=

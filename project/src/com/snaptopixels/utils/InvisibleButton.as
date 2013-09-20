@@ -49,7 +49,7 @@ package com.snaptopixels.utils
 			quadCover.height = _height;
 			if(displayTheButton)
 			{
-				quadCover.alpha = .4;
+				quadCover.alpha = .8;
 			}
 			else
 			{

@@ -58,9 +58,10 @@ package com.snaptopixels.TheWind
 			mStarling.stage.stageWidth = stageWidth;
 			mStarling.stage.stageHeight = stageHeight;
 			
-			mStarling.simulateMultitouch = true;
-			mStarling.enableErrorChecking = false;
-			mStarling.showStats = true;
+			mStarling.simulateMultitouch = false;
+			mStarling.enableErrorChecking = Capabilities.isDebugger;
+			mStarling.showStats = Capabilities.isDebugger;
+			mStarling.showStatsAt("left", "top", 2);
 
 			mStarling.addEventListener( starling.events.Event.ROOT_CREATED, function() : void
 			{
