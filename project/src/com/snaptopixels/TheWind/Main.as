@@ -32,7 +32,7 @@ package com.snaptopixels.TheWind
 			var iOS : Boolean = Capabilities.manufacturer.indexOf( "iOS" ) != -1;
 
 			Starling.multitouchEnabled = true;
-			Starling.handleLostContext = false;
+			Starling.handleLostContext = true;
 
 			var viewPort : Rectangle = RectangleUtil.fit( new Rectangle( 0, 0, stageWidth, stageHeight ), new Rectangle( 0, 0, stage.fullScreenWidth, stage.fullScreenHeight ), ScaleMode.SHOW_ALL, iOS );
 
@@ -60,8 +60,8 @@ package com.snaptopixels.TheWind
 			
 			mStarling.simulateMultitouch = false;
 			mStarling.enableErrorChecking = Capabilities.isDebugger;
-			mStarling.showStats = Capabilities.isDebugger;
-			mStarling.showStatsAt("left", "top", 2);
+//			mStarling.showStats = Capabilities.isDebugger;
+//			mStarling.showStatsAt("left", "top", 2);
 
 			mStarling.addEventListener( starling.events.Event.ROOT_CREATED, function() : void
 			{

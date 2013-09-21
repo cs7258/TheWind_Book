@@ -1,22 +1,26 @@
 package com.snaptopixels.TheWind
 {
+	import com.greensock.easing.Back;
+	import starling.display.BlendMode;
+	import starling.textures.TextureSmoothing;
+	import flash.utils.getQualifiedClassName;
+	import feathers.controls.Button;
 	import feathers.controls.List;
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.layout.HorizontalLayout;
-	
+
 	import starling.core.Starling;
 	import starling.display.Image;
+	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.textures.Texture;
-	import starling.textures.TextureSmoothing;
 	import starling.utils.AssetManager;
 
 	import com.greensock.TweenMax;
 	import com.greensock.easing.Quad;
-	import com.snaptopixels.utils.InvisibleButton;
 	import com.snaptopixels.utils.ProgressBar;
 	
 	public class StartUp extends Sprite
@@ -28,6 +32,8 @@ package com.snaptopixels.TheWind
 		private var pagesContainer : Sprite = new Sprite();
 		private var navbarContainer : Sprite = new Sprite();
 		private var navbarButtonsContainer : Sprite = new Sprite();
+		private var textImageContainer : Sprite = new Sprite();
+		private var textImage : Image;
 		private var pagesList : List;
 		private var navigationList : List;
 		
@@ -35,6 +41,8 @@ package com.snaptopixels.TheWind
 		private static var navBarYposClosed : Number;
 		private static var navBarWidth : Number;
 		private static var navBarHeight : Number;
+		private static var currentPageNumber : Number;
+		private static var textImageName : String;
 
 		public function StartUp()
 		{
@@ -46,6 +54,7 @@ package com.snaptopixels.TheWind
 			sAssets = assets;
 
 			addChild( pagesContainer );
+			addChild( textImageContainer );
 			addChild( loaderContainer );
 			addChild( navbarContainer );
 
@@ -71,20 +80,52 @@ package com.snaptopixels.TheWind
 
 		private function createNavigation() : void
 		{
-			var image : Image = new Image( sAssets.getTexture( "NavBar" ) );
-			image.smoothing = TextureSmoothing.TRILINEAR;
+			var image : starling.display.Quad = new starling.display.Quad( 2048, 215, 0x023954, true );
+			image.alpha = .9;
 			navbarContainer.addChild( image );
+			
 			navBarWidth = navbarContainer.width;
 			navBarHeight = navbarContainer.height;
-			navBarYposClosed = navbarContainer.y = -(navBarHeight - 55);
+			navBarYposClosed = -navBarHeight;
 			navbarContainer.y = -navBarHeight;
 			
-			var navbarButton : InvisibleButton = new InvisibleButton( 160, 80, false );
+			var logo : Image = new Image( sAssets.getTexture( "NavTheWindLogo" ) );
+			navbarContainer.addChild(logo);
+			logo.x = 77;
+			logo.y = 61;
+			
+			var sep1: Image = new Image( sAssets.getTexture( "NavSeperator" ) );
+			navbarContainer.addChild(sep1);
+			sep1.x = 353;
+			sep1.y = 31;
+			
+			var sep2: Image = new Image( sAssets.getTexture( "NavSeperator" ) );
+			navbarContainer.addChild(sep2);
+			sep2.x = 1682;
+			sep2.y = 31;
+			
+			var arrowLeft: Image = new Image( sAssets.getTexture( "NavChapterArrow" ) );
+			navbarContainer.addChild(arrowLeft);
+			arrowLeft.x = 416;
+			arrowLeft.y = 70;
+			
+			var arrowRight: Image = new Image( sAssets.getTexture( "NavChapterArrow" ) );
+			navbarContainer.addChild(arrowRight);
+
+			arrowRight.scaleX = -1;
+			arrowRight.x = 1630;
+			arrowRight.y = 70;
+			
+			var navbarButton : Button = new Button();
+			navbarButton.defaultSkin = new Image( sAssets.getTexture( "NavButtonUp" ) );
+			navbarButton.downSkin = new Image( sAssets.getTexture( "NavButtonDown" ) );
 			navbarButton.name = "navbar_button";
-			navbarContainer.addChild( navbarButton );
 			navbarButton.addEventListener( Event.TRIGGERED, openCloseNavBarContainer );
-			navbarButton.x = stage.stageWidth*.5 - navbarButton.width*.5;
-			navbarButton.y = 200;
+			navbarContainer.addChild( navbarButton );
+			navbarButton.validate();
+			
+			navbarButton.x = stage.stageWidth*.5 -(navbarButton.width*.5);
+			navbarButton.y = navBarHeight;
 			
 			navbarContainer.addChild( navbarButtonsContainer );
 			navbarButtonsContainer.x = 534;
@@ -124,7 +165,7 @@ package com.snaptopixels.TheWind
 			
 			validateNavigationListLayout();
 			
-			TweenMax.to( navbarContainer, .5, { y:navBarYposOpen, ease:Quad.easeOut, onComplete:closeNavBarContainer, onCompleteParams:[true] } );
+			TweenMax.to( navbarContainer, .5, { y:navBarYposOpen, ease:com.greensock.easing.Quad.easeOut, onComplete:closeNavBarContainer, onCompleteParams:[true] } );
 		}
 
 		private function validateNavigationListLayout() : void
@@ -140,18 +181,18 @@ package com.snaptopixels.TheWind
 			if(firstTime)
 			{
 				firstTime = false;
-				TweenMax.to( navbarContainer, .3, { y:navBarYposClosed, ease:Quad.easeOut, delay: .4} );
+				TweenMax.to( navbarContainer, .3, { y:navBarYposClosed, ease:com.greensock.easing.Quad.easeOut, delay: .4} );
 			}
 			else
 			{
-				TweenMax.to( navbarContainer, .3, { y:navBarYposClosed, ease:Quad.easeOut} );
+				TweenMax.to( navbarContainer, .3, { y:navBarYposClosed, ease:com.greensock.easing.Quad.easeOut} );
 			}
 		}
 		
 		private function openNavBarContainer():void
 		{
 			TweenMax.killTweensOf( navbarContainer );
-			TweenMax.to( navbarContainer, .3, { y:navBarYposOpen, ease:Quad.easeInOut } );
+			TweenMax.to( navbarContainer, .3, { y:navBarYposOpen, ease:com.greensock.easing.Quad.easeInOut } );
 		}
 		
 		private function openCloseNavBarContainer(event:Event):void
@@ -233,19 +274,117 @@ package com.snaptopixels.TheWind
 		private function checkCurrentPageIndex() : void
 		{
 			trace( "page number is :: " + pagesList.horizontalPageIndex );
+			currentPageNumber = pagesList.horizontalPageIndex;
 		}
 
 		private function list_scrollStartHandler( event : String ) : void
 		{
-//			trace("// page scrolling START :: ");
 			closeNavBarContainer(false);
-			checkCurrentPageIndex();
+			hideTextImage();
 		}
 
 		private function list_scrollCompleteHandler( event : Event ) : void
 		{
-//			trace("// page scrolling COMPLETE :: ");
 			checkCurrentPageIndex();
+			loadTextImage();
+		}
+		
+		private function hideTextImage():void
+		{
+			TweenMax.killTweensOf( textImageContainer );
+			textImageContainer.visible = false;
+		}
+		
+		private function loadTextImage() : void
+		{
+			switch(currentPageNumber){
+				case 1:
+					textImageContainer.x = 1096;
+					textImageContainer.y = 569;
+					break;
+				case 2:
+					textImageContainer.x = 1096;
+					textImageContainer.y = 320;
+					break;
+				case 3:
+					textImageContainer.x = 1062;
+					textImageContainer.y = 1035;
+					break;
+				case 4:
+					textImageContainer.x = 1077;
+					textImageContainer.y = 1152;
+					break;
+				case 5:
+					textImageContainer.x = 1077;
+					textImageContainer.y = 277;
+					break;
+				case 6:
+					textImageContainer.x = 1077;
+					textImageContainer.y = 311;
+					break;
+				case 7:
+					textImageContainer.x = 1077;
+					textImageContainer.y = 398;
+					break;
+				case 8:
+					textImageContainer.x = 1077;
+					textImageContainer.y = 333;
+					break;
+				case 9:
+					textImageContainer.x = 1194;
+					textImageContainer.y = 287;
+					break;
+				case 10:
+					textImageContainer.x = 1212;
+					textImageContainer.y = 419;
+					break;
+				case 11:
+					textImageContainer.x = 1262;
+					textImageContainer.y = 184;
+					break;
+				case 12:
+					textImageContainer.x = 1080;
+					textImageContainer.y = 386;
+					break;
+				default:
+			}
+			
+			
+			if (pagesList.horizontalPageIndex > 0 && pagesList.horizontalPageIndex < 13)
+			{
+				if (pagesList.horizontalPageIndex < 10)
+				{
+					textImageName = "Text0" + String( pagesList.horizontalPageIndex );
+				}
+				else
+				{
+					textImageName = "Text" + String( pagesList.horizontalPageIndex );
+				}
+
+				const texture : Texture = sAssets.getTexture( textImageName );
+				if (textImage)
+				{
+					textImage.texture.dispose();
+					textImage.texture = texture;
+					textImage.readjustSize();
+					trace( getQualifiedClassName( this ) + " -> textImage is already created so reuse this texture" );
+				}
+				else
+				{
+					trace( getQualifiedClassName( this ) + " -> textImage created" );
+					textImage = new Image( texture );
+					textImageContainer.addChild( textImage );
+					textImageContainer.blendMode = BlendMode.MULTIPLY;
+					textImageContainer.touchable = false;
+					textImage.dispose();
+				}
+				
+				textImage.touchable = false;
+				textImage.smoothing = TextureSmoothing.BILINEAR;
+				
+				textImageContainer.visible = true;
+				TweenMax.from( textImageContainer, .8, {x:"40", alpha:0, ease:com.greensock.easing.Back.easeOut, delay:.4 } );
+			}
 		}
 		
 		private function pagesItemRendererFactory():IListItemRenderer
