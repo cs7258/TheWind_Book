@@ -173,6 +173,11 @@ package com.snaptopixels.TheWind
 			navigationList.width = 980;
 			navigationList.height = 110;
 			navigationList.validate();
+			
+			var marker : Marker = new Marker( 980, 110 );
+			navbarContainer.addChildAt( marker, 1 );
+			marker.x = navbarButtonsContainer.x;
+			marker.y = navbarButtonsContainer.y;
 		}
 		
 		private function closeNavBarContainer(firstTime:Boolean):void
