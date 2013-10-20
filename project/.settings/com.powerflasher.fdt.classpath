@@ -7,6 +7,6 @@
     <AS3Classpath generateProblems="false" sdkBased="true" type="lib" useAsSharedCode="false">frameworks/libs/air/servicemonitor.swc</AS3Classpath>
     <AS3Classpath generateProblems="true" sdkBased="false" type="source" useAsSharedCode="false">src</AS3Classpath>
     <AS3Classpath generateProblems="false" sdkBased="false" type="lib" useAsSharedCode="false">lib/starling1.4.swc</AS3Classpath>
-    <AS3Classpath generateProblems="false" sdkBased="false" type="source" useAsSharedCode="false">FeathersGitHub</AS3Classpath>
     <AS3Classpath generateProblems="false" sdkBased="false" type="lib" useAsSharedCode="false">lib/greensock.swc</AS3Classpath>
+    <AS3Classpath generateProblems="false" sdkBased="false" type="source" useAsSharedCode="false">FeathersGitHub</AS3Classpath>
 </AS3Classpath>

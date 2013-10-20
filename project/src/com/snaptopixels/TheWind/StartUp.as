@@ -292,7 +292,7 @@ package com.snaptopixels.TheWind
 		private function hideTextImage():void
 		{
 			TweenMax.killTweensOf( textImageContainer );
-			textImageContainer.visible = false;
+			TweenMax.to( textImageContainer, 0, {alpha:0} );
 		}
 		
 		private function loadTextImage() : void
@@ -349,42 +349,48 @@ package com.snaptopixels.TheWind
 				default:
 			}
 			
-			
 			if (pagesList.horizontalPageIndex > 0 && pagesList.horizontalPageIndex < 13)
 			{
-				if (pagesList.horizontalPageIndex < 10)
+				if (pagesList.horizontalPageIndex > 0 && pagesList.horizontalPageIndex < 10)
 				{
 					textImageName = "Text0" + String( pagesList.horizontalPageIndex );
 				}
-				else
+				else 
+				if (pagesList.horizontalPageIndex >= 10)
 				{
 					textImageName = "Text" + String( pagesList.horizontalPageIndex );
 				}
-
-				const texture : Texture = sAssets.getTexture( textImageName );
-				if (textImage)
-				{
-					textImage.texture.dispose();
-					textImage.texture = texture;
-					textImage.readjustSize();
-					trace( getQualifiedClassName( this ) + " -> textImage is already created so reuse this texture" );
-				}
-				else
-				{
-					trace( getQualifiedClassName( this ) + " -> textImage created" );
-					textImage = new Image( texture );
-					textImageContainer.addChild( textImage );
-					textImageContainer.blendMode = BlendMode.MULTIPLY;
-					textImageContainer.touchable = false;
-					textImage.dispose();
-				}
-				
-				textImage.touchable = false;
-				textImage.smoothing = TextureSmoothing.BILINEAR;
-				
-				textImageContainer.visible = true;
-				TweenMax.from( textImageContainer, .8, {x:"40", alpha:0, ease:com.greensock.easing.Back.easeOut, delay:.4 } );
 			}
+			else
+			{
+				textImageName = "Blank";
+			}
+			
+			trace( 'textImageName: ' + (textImageName) );
+
+			const texture : Texture = sAssets.getTexture( textImageName );
+			if (textImage)
+			{
+				textImage.texture.dispose();
+				textImage.texture = texture;
+				textImage.readjustSize();
+				trace( getQualifiedClassName( this ) + " -> textImage is already created so reuse this texture" );
+			}
+			else
+			{
+				trace( getQualifiedClassName( this ) + " -> textImage created" );
+				textImage = new Image( texture );
+				textImageContainer.addChild( textImage );
+				textImageContainer.blendMode = BlendMode.MULTIPLY;
+				textImageContainer.touchable = false;
+				textImage.dispose();
+			}
+
+			textImage.touchable = false;
+			textImage.smoothing = TextureSmoothing.BILINEAR;
+			
+			textImageContainer.x += 40;
+			TweenMax.to( textImageContainer, .8, {x:"-40", alpha:1, ease:com.greensock.easing.Back.easeOut, delay:.4} );
 		}
 		
 		private function pagesItemRendererFactory():IListItemRenderer
