@@ -1,4 +1,4 @@
-package com.snaptopixels.TheWind
+package com.snaptopixels.utils
 {
 	import starling.display.Quad;
 	import starling.display.Sprite;

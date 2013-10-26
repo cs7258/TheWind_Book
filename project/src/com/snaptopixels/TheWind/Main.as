@@ -40,7 +40,7 @@ package com.snaptopixels.TheWind
 			var appDir : File = File.applicationDirectory;
 			var assets : AssetManager = new AssetManager( scaleFactor );
 
-			assets.verbose = Capabilities.isDebugger;
+			assets.verbose = false;
 			assets.enqueue( appDir.resolvePath( "assets" ) );
 
 			var backgroundClass : Class = BackgroundHD;
@@ -54,23 +54,23 @@ package com.snaptopixels.TheWind
 			background.smoothing = true;
 			addChild( background );
 
-			mStarling = new Starling( StartUp, stage, viewPort );
+			mStarling = new Starling( View_MainLayout, stage, viewPort );
 			mStarling.stage.stageWidth = stageWidth;
 			mStarling.stage.stageHeight = stageHeight;
 			
 			mStarling.simulateMultitouch = false;
-			mStarling.enableErrorChecking = Capabilities.isDebugger;
-//			mStarling.showStats = Capabilities.isDebugger;
-//			mStarling.showStatsAt("left", "top", 2);
+			mStarling.enableErrorChecking = true;
+			mStarling.showStats = true;
+			mStarling.showStatsAt("left", "top", 2);
 
 			mStarling.addEventListener( starling.events.Event.ROOT_CREATED, function() : void
 			{
 				removeChild( background );
 				background = null;
 
-				var game : StartUp = mStarling.root as StartUp;
+				var main : View_MainLayout = mStarling.root as View_MainLayout;
 				var bgTexture : Texture = Texture.fromEmbeddedAsset( backgroundClass, false, false, scaleFactor );
-				game.start( bgTexture, assets );
+				main.start( bgTexture, assets );
 				mStarling.start();
 			} );
 
