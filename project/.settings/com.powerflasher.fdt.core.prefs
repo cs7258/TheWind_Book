@@ -1,4 +1,4 @@
-#Thu Oct 10 16:51:45 EDT 2013
+#Fri Oct 25 21:14:50 EDT 2013
 com.powerflasher.fdt.core.CompatiblePlayers=AIR_Debug_Launcher
 com.powerflasher.fdt.core.CompilerArguments=-static-link-runtime-shared-libraries\=true\n-target-player\={playerVersion}\n-library-path+\="{flexSDK}/frameworks/locale/en_US"\n-default-size\=550,400\n-swf-version\=21
 com.powerflasher.fdt.core.DefaultOutputFolder=bin
@@ -13,8 +13,27 @@ com.powerflasher.fdt.core.PlatformType=MOBILE
 com.powerflasher.fdt.core.PlayerVersion=11.8
 com.powerflasher.fdt.core.ProjectTypeHint=AIR Mobile
 com.powerflasher.fdt.core.Runtime=AIR
-com.powerflasher.fdt.core.SdkName=Flex 4.6.0 AIR 3.8 Compiler FP 11.8
-com.powerflasher.fdt.core.mobile.Android.ACTIVE=true
+com.powerflasher.fdt.core.SdkName=Flex 4.6.0 AIR 3.8
+com.powerflasher.fdt.core.mobile.AirDesktop.ACTIVE=false
+com.powerflasher.fdt.core.mobile.AirDesktop.AVAILABLE.EXTENSIONS=
+com.powerflasher.fdt.core.mobile.AirDesktop.CUSTOM.ADT.CMD.LINE=${package} ${signing} ${target} ${connection} ${provision} ${output} ${content} ${icons}
+com.powerflasher.fdt.core.mobile.AirDesktop.CUSTOMIZE.ADT.ARGS=false
+com.powerflasher.fdt.core.mobile.AirDesktop.DEPLOY.LOCATION=
+com.powerflasher.fdt.core.mobile.AirDesktop.DEPLOY.PRE.PACKAGE.LAUNCHER=\ -- No adequate launcher found\! -- 
+com.powerflasher.fdt.core.mobile.AirDesktop.DEPLOY.TYPE.AIR.DESKTOP=AIR
+com.powerflasher.fdt.core.mobile.AirDesktop.ICON.PATH.114x114=
+com.powerflasher.fdt.core.mobile.AirDesktop.ICON.PATH.128x128=
+com.powerflasher.fdt.core.mobile.AirDesktop.ICON.PATH.16x16=
+com.powerflasher.fdt.core.mobile.AirDesktop.ICON.PATH.32x32=
+com.powerflasher.fdt.core.mobile.AirDesktop.ICON.PATH.36x36=
+com.powerflasher.fdt.core.mobile.AirDesktop.ICON.PATH.48x48=
+com.powerflasher.fdt.core.mobile.AirDesktop.ICON.PATH.72x72=
+com.powerflasher.fdt.core.mobile.AirDesktop.MOBILE.DESCRIPTOR=bin/TheWind-app.xml
+com.powerflasher.fdt.core.mobile.AirDesktop.PACKAGE.CONTENT=bin/TheWind-app.xml > TheWind-app.xml;bin/TheWind.swf > TheWind.swf;
+com.powerflasher.fdt.core.mobile.AirDesktop.SIGNATURE.CERTIFICATE=
+com.powerflasher.fdt.core.mobile.AirDesktop.SIGNATURE.PWD=HZsdm2UDN/4\=
+com.powerflasher.fdt.core.mobile.AirDesktop.SIGNATURE.REMEMBER.PWD=false
+com.powerflasher.fdt.core.mobile.Android.ACTIVE=false
 com.powerflasher.fdt.core.mobile.Android.AVAILABLE.EXTENSIONS=
 com.powerflasher.fdt.core.mobile.Android.CUSTOM.ADT.CMD.LINE=${package} ${target} ${connection} ${market} ${signing} ${provision} ${output} ${content} ${icons} ${platformsdk}
 com.powerflasher.fdt.core.mobile.Android.CUSTOMIZE.ADT.ARGS=false
@@ -47,9 +66,9 @@ com.powerflasher.fdt.core.mobile.iOS.ICON.PATH.57x57=
 com.powerflasher.fdt.core.mobile.iOS.ICON.PATH.72x72=
 com.powerflasher.fdt.core.mobile.iOS.MOBILE.DESCRIPTOR=bin/TheWind-app.xml
 com.powerflasher.fdt.core.mobile.iOS.PACKAGE.CONTENT=bin/TheWind-app.xml > TheWind-app.xml;bin/TheWind.swf > TheWind.swf;bin/Default-Landscape@2x.png > Default-Landscape@2x.png;bin/Default-LandscapeRight@2x.png > Default-LandscapeRight@2x.png;bin/Default-Landscape.png > Default-Landscape.png;bin/Default-LandscapeRight.png > Default-LandscapeRight.png;bin/assets;
-com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.CERTIFICATE=../../../../Documents/My Dropbox/_code/ios-certificates/ios-developer.p12
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.CERTIFICATE=../../../../Documents/My Dropbox/_code/ios-certificates/ios-distribution.p12
 com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.CERTIFICATE.RELEASE=
-com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PROVISIONING.FILE=../../../../Documents/My Dropbox/_code/ios-certificates/STP_Development.mobileprovision
+com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PROVISIONING.FILE=../../../../Documents/My Dropbox/_code/ios-certificates/STP_Distribution.mobileprovision
 com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PROVISIONING.FILE.RELEASE=
 com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PWD=+j8B4XAxqQIdmx2bZQM3/g\=\=
 com.powerflasher.fdt.core.mobile.iOS.SIGNATURE.PWD.RELEASE=HZsdm2UDN/4\=
