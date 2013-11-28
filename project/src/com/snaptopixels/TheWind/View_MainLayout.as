@@ -67,6 +67,7 @@ package com.snaptopixels.TheWind
 
 		private function skipToChapter( event : String, num : Number ) : void
 		{
+			closeNavBarContainer();
 			Constants.NEXT_PAGE_NUMBER = num;
 			pagesContainer.skipToPage( Constants.NEXT_PAGE_NUMBER );
 		}

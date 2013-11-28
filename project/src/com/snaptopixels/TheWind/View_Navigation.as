@@ -18,6 +18,7 @@ package com.snaptopixels.TheWind
 	/**
 	 * @author Retropunk
 	 */
+	
 	public class View_Navigation extends Sprite
 	{
 		public function View_Navigation()
